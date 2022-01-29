@@ -1,0 +1,12 @@
+main_floppy.img: main.bin
+	cp main.bin main_floppy.img
+	truncate -s 1440k main_floppy.img
+
+main.bin: main.asm
+	nasm main.asm -f bin -o main.bin
+
+run:
+	qemu-system-i386 -fda main_floppy.img
+
+clear:
+	rm -rf main.bin main_floppy.img
